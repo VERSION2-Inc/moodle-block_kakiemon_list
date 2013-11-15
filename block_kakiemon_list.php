@@ -2,6 +2,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 use ver2\kakiemon_list\keb;
+use ver2\kakiemon\ke;
 use ver2\kakiemon\ke_page;
 
 class block_kakiemon_list extends block_base {
@@ -69,9 +70,9 @@ class block_kakiemon_list extends block_base {
 		$o .= \html_writer::end_tag('ul');
 
 
-		$o .= $OUTPUT->heading(keb::str('otherspages'));
+		$o .= $OUTPUT->heading(keb::str('bestpages'));
 		$pagedb = new ke_page();
-		$pages = $pagedb->others(self::PAGE_NUM);
+		$pages = $pagedb->most_liked();
 		$o .= \html_writer::start_tag('ul');
 		foreach ($pages as $page) {
 			$cm = get_coursemodule_from_instance('kakiemon', $page->kakiemon, 0, false, MUST_EXIST);
@@ -79,14 +80,14 @@ class block_kakiemon_list extends block_base {
 					'id' => $cm->id,
 					'page' => $page->id
 			));
-			$link = $OUTPUT->action_link($url, $page->name);
+			$link = $OUTPUT->action_link($url, $page->name).' ('.$page->cnt.ke::str('like').')';
 			$o .= \html_writer::tag('li', $link);
 		}
 		$o .= \html_writer::end_tag('ul');
 
-		$o .= $OUTPUT->heading(keb::str('otherspages'));
+		$o .= $OUTPUT->heading(keb::str('worstpages'));
 		$pagedb = new ke_page();
-		$pages = $pagedb->others(self::PAGE_NUM);
+		$pages = $pagedb->most_disliked();
 		$o .= \html_writer::start_tag('ul');
 		foreach ($pages as $page) {
 			$cm = get_coursemodule_from_instance('kakiemon', $page->kakiemon, 0, false, MUST_EXIST);
@@ -94,7 +95,7 @@ class block_kakiemon_list extends block_base {
 					'id' => $cm->id,
 					'page' => $page->id
 			));
-			$link = $OUTPUT->action_link($url, $page->name);
+			$link = $OUTPUT->action_link($url, $page->name).' ('.$page->cnt.ke::str('dislike').')';
 			$o .= \html_writer::tag('li', $link);
 		}
 		$o .= \html_writer::end_tag('ul');
