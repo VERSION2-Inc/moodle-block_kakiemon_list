@@ -12,16 +12,6 @@ class block_kakiemon_list extends block_base {
 		$this->title = get_string('pluginname', 'block_kakiemon_list');
 	}
 
-// 	/**
-// 	 *
-// 	 * @return boolean[]
-// 	 */
-// 	public function applicable_formats() {
-// 		return array(
-// 				'course' => true
-// 		);
-// 	}
-
 	/**
 	 *
 	 * @return \stdClass
@@ -36,6 +26,7 @@ class block_kakiemon_list extends block_base {
 		require_once $CFG->dirroot . '/blocks/kakiemon_list/locallib.php';
 
 		$keb = new keb($COURSE->id);
+		$dateformat = get_string('strftimedate', 'langconfig');
 
 		$o = '';
 
@@ -50,6 +41,7 @@ class block_kakiemon_list extends block_base {
 					'page' => $page->id
 			));
 			$link = $OUTPUT->action_link($url, $page->name);
+			$link .= ' (' .userdate($page->timemodified, $dateformat) .')';
 			$o .= \html_writer::tag('li', $link);
 		}
 		$o .= \html_writer::end_tag('ul');
@@ -65,6 +57,7 @@ class block_kakiemon_list extends block_base {
 					'page' => $page->id
 			));
 			$link = $OUTPUT->action_link($url, $page->name);
+			$link .= ' (' .userdate($page->timemodified, $dateformat) .')';
 			$o .= \html_writer::tag('li', $link);
 		}
 		$o .= \html_writer::end_tag('ul');
