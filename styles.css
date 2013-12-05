@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.block_kakiemon_list ul {
+	margin-bottom: 0;
+}
+.block_kakiemon_list .seemore {
+	text-align: right;
+}
