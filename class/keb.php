@@ -27,7 +27,7 @@ class keb {
 	 * @param array $params
 	 * @return \moodle_url
 	 */
-	public function url($url, array $params = null) {
+	public function url($url, array $params = array()) {
 		if ($url instanceof \moodle_url) {
 			return new \moodle_url($url, $params);
 		}
@@ -39,7 +39,7 @@ class keb {
 			$url = self::PLUGIN_DIR.$url;
 		}
 
-		$params['course'] = $this->courseid;
+		$params = array('course' => $this->courseid) + $params;
 
 		return new \moodle_url($url, $params);
 	}

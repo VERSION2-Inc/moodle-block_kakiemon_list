@@ -1,7 +1,7 @@
 <?php
 namespace ver2\kakiemon_list;
 
-use ver2\kakiemon\kakiemon as ke;
+use ver2\kakiemon\ke;
 
 require_once '../../config.php';
 require_once $CFG->dirroot . '/blocks/kakiemon_list/locallib.php';
@@ -13,8 +13,12 @@ class page_pages extends page {
 	}
 
 	private function view() {
-
+		$mode = required_param('mode', PARAM_ALPHA);
+		
 		echo $this->output->header();
+		
+		echo $this->output->heading(keb::str('kakiemonpagelist'));
+		echo $this->output->heading(keb::str(''), 3);
 
 		$this->print_page_table();
 

@@ -9,3 +9,4 @@ $string['pluginname'] = '柿右衛門ブロック';
 $string['seemore'] = 'もっと見る';
 $string['worstpages'] = 'ワーストランキング';
 $string['seexmorepages'] = 'もっと見る (他{$a}件)';
+$string['kakiemonpagelist'] = '柿右衛門ページ一覧';
