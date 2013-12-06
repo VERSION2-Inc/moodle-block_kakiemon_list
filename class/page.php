@@ -35,6 +35,7 @@ abstract class page {
 
 		require_login($courseid);
 
+		$PAGE->set_pagelayout('incourse');
 		$PAGE->set_url($this->url);
 		$PAGE->set_title($this->course->fullname);
 		$PAGE->set_heading($this->course->fullname);

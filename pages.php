@@ -14,11 +14,28 @@ class page_pages extends page {
 
 	private function view() {
 		$mode = required_param('mode', PARAM_ALPHA);
-		
+
+		switch ($mode) {
+			case 'my':
+				$headingid = 'mypages';
+				break;
+			case 'others':
+				$headingid = 'otherspages';
+				break;
+			case 'best':
+				$headingid = 'bestpages';
+				break;
+			case 'worst':
+				$headingid = 'worstpages';
+				break;
+			default:
+				print_error('invalidmode', 'block_kakiemon_list');
+		}
+
 		echo $this->output->header();
-		
+
 		echo $this->output->heading(keb::str('kakiemonpagelist'));
-		echo $this->output->heading(keb::str(''), 3);
+		echo $this->output->heading(keb::str($headingid), 3);
 
 		$this->print_page_table();
 
