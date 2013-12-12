@@ -30,6 +30,10 @@ class block_kakiemon_list extends block_base {
 	public function get_content() {
 		global $CFG, $PAGE, $OUTPUT, $COURSE;
 
+		if (!isloggedin()) {
+			return null;
+		}
+
 		if ($this->content) {
 			return $this->content;
 		}
